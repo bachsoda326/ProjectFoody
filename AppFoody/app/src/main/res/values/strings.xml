@@ -5,4 +5,10 @@
     <string name="moinhat">Mới nhất</string>
     <string name="khuvuc">Khu vực</string>
     <string name="danhmuc">Danh mục</string>
+    <string name="gantoi">Gần tôi</string>
+    <string name="giaohang">Giao hàng</string>
+    <string name="gameandfun">Game and fun</string>
+    <string name="danhgia">Đánh giá</string>
+    <string name="blogs">Blogs</string>
+    <string name="topmember">Top thành viên</string>
 </resources>

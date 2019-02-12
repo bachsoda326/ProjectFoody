@@ -1,4 +1,4 @@
-package com.example.appfoody.View.View.View;
+package com.example.appfoody.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
