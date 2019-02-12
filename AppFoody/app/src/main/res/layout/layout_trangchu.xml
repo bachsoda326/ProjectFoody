@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackgroundTrangChu"
+    tools:context=".View.View.View.TrangChuActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/googleg_disabled_color_18" />
+
+        <RadioGroup
+            android:id="@+id/rdgroup_odau_angi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <RadioButton
+                android:id="@+id/rd_odau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/odau"
+                android:button="@android:color/transparent"
+                android:background="@drawable/custom_radiobtn_odau"
+                android:textColor="@drawable/custom_textcolor_radiobtn"
+                android:padding="7dp"/>
+
+            <RadioButton
+                android:id="@+id/rd_angi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/angi"
+                android:button="@android:color/transparent"
+                android:background="@drawable/custom_radiobtn_angi"
+                android:textColor="@drawable/custom_textcolor_radiobtn"
+                android:padding="7dp"/>
+
+        </RadioGroup>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/baseline_add_white_18dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorAccent">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/moinhat"
+            android:button="@android:color/transparent"
+            android:textAlignment="center"
+            android:padding="2dp"
+            android:drawableBottom="@drawable/baseline_keyboard_arrow_down_black_18dp"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundTrangChu"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/danhmuc"
+            android:button="@android:color/transparent"
+            android:textAlignment="center"
+            android:padding="2dp"
+            android:drawableBottom="@drawable/baseline_keyboard_arrow_down_black_18dp"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundTrangChu"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/khuvuc"
+            android:button="@android:color/transparent"
+            android:textAlignment="center"
+            android:padding="2dp"
+            android:drawableBottom="@drawable/baseline_keyboard_arrow_down_black_18dp"/>
+
+    </RadioGroup>
+
+
+</LinearLayout>

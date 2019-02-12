@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">App Foody</string>
+    <string name="odau">Ở đâu</string>
+    <string name="angi">Ăn gì</string>
+    <string name="moinhat">Mới nhất</string>
+    <string name="khuvuc">Khu vực</string>
+    <string name="danhmuc">Danh mục</string>
+</resources>
