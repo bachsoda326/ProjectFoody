@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">App Foody</string>
+    <string name="email">Email</string>
+    <string name="matkhau">Mật Khẩu</string>
+    <string name="dangnhap">Đăng Nhập</string>
+    <string name="hoac">Hoặc</string>
+    <string name="dangnhapfacebook">Đăng nhập Facebook</string>
+    <string name="dangnhapbanggoogle">Đăng nhập google</string>
+    <string name="quenmatkhau">Quên mật khẩu</string>
+    <string name="dangkymoi"> Đăng ký mới</string>
+    <string name="facebook_app_id">349419059245376</string>
     <string name="odau">Ở đâu</string>
     <string name="angi">Ăn gì</string>
     <string name="moinhat">Mới nhất</string>
@@ -11,4 +20,17 @@
     <string name="danhgia">Đánh giá</string>
     <string name="blogs">Blogs</string>
     <string name="topmember">Top thành viên</string>
+    <string name="dangtai">Đang Tải...</string>
+    <string name="nhaplaimatkhau">Nhập lại mật khẩu</string>
+    <string name="dangky">Đăng Ký</string>
+    <string name="thongbaoloidangky">Thông báo lỗi</string>
+    <string name="thongbaonhaplaimatkhau">Vui lòng nhập giống mật khẩu </string>
+    <string name="dangkythanhcong">Đăng ký thành công</string>
+    <string name="dangxuly">Đang xử lý</string>
+    <string name="khoiphucmatkhau">Khôi phục mật khẩu </string>
+    <string name="chuoikhoiphucmatkhau">Bạn vui lòng nhập email để khôi phục</string>
+    <string name="guimail">Gửi mail </string>
+    <string name="chuoithanhvien">Bạn không phải là thành viên ?</string>
+    <string name="thongbaoemailkhonghople">Email bạn nhập không hợp lệ </string>
+    <string name="thongbaoguimailthanhcong">Gửi email thành công !</string>
 </resources>
