@@ -11,4 +11,8 @@
     <string name="danhgia">Đánh giá</string>
     <string name="blogs">Blogs</string>
     <string name="topmember">Top thành viên</string>
+    <string name="datmon">Đặt món</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
