@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity  implements GoogleApiClient
         mCallBackFacebook=CallbackManager.Factory.create();
         loginManager=LoginManager.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth.signOut();
 
         btnDangNhap=(Button) findViewById(R.id.btnDangNhap);
         btnLoginGG=(Button) findViewById(R.id.btnLoginGG);

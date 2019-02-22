@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.appfoody.Control.DangKyControl;
+import com.example.appfoody.Model.ThanhVienModel;
 import com.example.appfoody.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +23,8 @@ public class DangKiActivity extends AppCompatActivity implements View.OnClickLis
     EditText edEmailDangKy,edMatKhau,edNhapLaiMatKhau;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
+    DangKyControl dangKyControl;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +47,7 @@ public class DangKiActivity extends AppCompatActivity implements View.OnClickLis
         progressDialog.setIndeterminate(true);
         progressDialog.show();
 
-        String email =edEmailDangKy.getText().toString();
+        final String email =edEmailDangKy.getText().toString();
         String matkhau=edMatKhau.getText().toString();
         String nhaplaimatkhau=edNhapLaiMatKhau.getText().toString();
         String thongbaoloi=getString(R.string.thongbaoloidangky);
@@ -64,9 +68,17 @@ public class DangKiActivity extends AppCompatActivity implements View.OnClickLis
             firebaseAuth.createUserWithEmailAndPassword(email,matkhau).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful())
+                    if(task.isSuccessful()) {
+                        ThanhVienModel thanhVienModel = new ThanhVienModel();
+                        thanhVienModel.setHoten(email);
+                        thanhVienModel.setHinhanh("user.png");
+                        String uid = task.getResult().getUser().getUid();
+
+                        dangKyControl = new DangKyControl();
+                        dangKyControl.ThemThanhVienControl(thanhVienModel, uid);
                         progressDialog.dismiss();
-                        Toast.makeText(DangKiActivity.this,getString(R.string.dangkythanhcong),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DangKiActivity.this, getString(R.string.dangkythanhcong), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
     }

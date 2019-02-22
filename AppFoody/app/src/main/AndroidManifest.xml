@@ -20,9 +20,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".View.TrangChuActivity">
-
-        </activity>
         <activity android:name=".View.LoginActivity">
 
         </activity>
@@ -30,7 +27,12 @@
         <activity android:name=".View.DangKiActivity">
 
         </activity>
+
         <activity android:name=".View.KhoiPhucMatKhauActivity">
+
+        </activity>
+
+        <activity android:name=".View.TrangChuActivity">
 
         </activity>
 
