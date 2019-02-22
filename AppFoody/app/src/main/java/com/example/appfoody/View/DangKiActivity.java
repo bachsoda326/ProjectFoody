@@ -55,9 +55,10 @@ public class DangKiActivity extends AppCompatActivity implements View.OnClickLis
         {
             thongbaoloi +=getString(R.string.matkhau);
             Toast.makeText(this,thongbaoloi,Toast.LENGTH_SHORT).show();
-        }else if(nhaplaimatkhau.equals(matkhau))
+        }else if(!nhaplaimatkhau.equals(matkhau))
         {
             Toast.makeText(this,getString(R.string.thongbaonhaplaimatkhau),Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }else
         {
             firebaseAuth.createUserWithEmailAndPassword(email,matkhau).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
