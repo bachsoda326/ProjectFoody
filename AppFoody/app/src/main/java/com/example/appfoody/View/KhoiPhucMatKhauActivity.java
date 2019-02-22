@@ -55,7 +55,7 @@ public class KhoiPhucMatKhauActivity extends AppCompatActivity implements View.O
                             }
 
                         }
-                    })
+                    });
                 }else{
                     Toast.makeText(KhoiPhucMatKhauActivity.this,getString(R.string.thongbaoemailkhonghople),Toast.LENGTH_SHORT).show();
                 }
@@ -69,6 +69,6 @@ public class KhoiPhucMatKhauActivity extends AppCompatActivity implements View.O
     }
     public boolean kiemTraEmail(String email)
     {
-        Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
