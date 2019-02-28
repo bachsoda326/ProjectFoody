@@ -46,9 +46,9 @@ public class BinhLuanActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_binhluan);
 
-        /*maquanan = getIntent().getStringExtra("maquanan");
+        maquanan = getIntent().getStringExtra("maquanan");
         String tenquan = getIntent().getStringExtra("tenquan");
-        String diachi = getIntent().getStringExtra("diachi");*/
+        String diachi = getIntent().getStringExtra("diachi");
 
         sharedPreferences = getSharedPreferences("luudangnhap",MODE_PRIVATE);
 
@@ -72,8 +72,8 @@ public class BinhLuanActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
-        /*txtTenQuanAn.setText(tenquan);
-        txtDiaChiQuanAn.setText(diachi);*/
+        txtTenQuanAn.setText(tenquan);
+        txtDiaChiQuanAn.setText(diachi);
 
         btnChonHinh.setOnClickListener(this);
         txtDangBinhLuan.setOnClickListener(this);
