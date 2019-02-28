@@ -2,6 +2,7 @@ package com.example.appfoody.View;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,6 +58,9 @@ public class LoginActivity extends AppCompatActivity  implements GoogleApiClient
     CallbackManager mCallBackFacebook;
     LoginManager loginManager;
     List<String> permissionFB =Arrays.asList("email","public_profile");
+
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,8 @@ public class LoginActivity extends AppCompatActivity  implements GoogleApiClient
         btnDangNhap.setOnClickListener(this);
         txtDangKyMoi.setOnClickListener(this);
         txtQuenMatKhau.setOnClickListener(this);
+
+        sharedPreferences = getSharedPreferences("luudangnhap",MODE_PRIVATE);
 
         taoClientDangNhapGoogle();
     }
@@ -204,11 +210,15 @@ public class LoginActivity extends AppCompatActivity  implements GoogleApiClient
     }
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-        FirebaseUser user =firebaseAuth.getCurrentUser();
-        if(user !=null)
-        {
-           Intent iTrangChu= new Intent(this,TrangChuActivity.class);
-           startActivity(iTrangChu);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user != null){
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("mauser",user.getUid());
+            editor.commit();
+
+            Intent iTrangChu = new Intent(this,TrangChuActivity.class);
+            startActivity(iTrangChu);
         }else{
 
         }
