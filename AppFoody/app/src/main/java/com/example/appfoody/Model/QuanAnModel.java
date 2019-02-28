@@ -22,6 +22,7 @@ public class QuanAnModel implements Parcelable {
     long luotthich;
     List<String> tienich;
     List<String> hinhanhquanan;
+    List<ThucDonModel> thucDons;
     List<BinhLuanModel> binhLuanModelList;
     List<ChiNhanhQuanAnModel> chiNhanhQuanAnModelList;
 
@@ -137,6 +138,14 @@ public class QuanAnModel implements Parcelable {
 
     public void setHinhanhquanan(List<String> hinhanhquanan) {
         this.hinhanhquanan = hinhanhquanan;
+    }
+
+    public List<ThucDonModel> getThucDons() {
+        return thucDons;
+    }
+
+    public void setThucDons(List<ThucDonModel> thucDons) {
+        this.thucDons = thucDons;
     }
 
     public List<BinhLuanModel> getBinhLuanModelList() {

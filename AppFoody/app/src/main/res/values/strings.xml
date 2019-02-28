@@ -34,6 +34,8 @@
     <string name="chuoithanhvien">Bạn không phải là thành viên ?</string>
     <string name="thongbaoemailkhonghople">Email bạn nhập không hợp lệ </string>
     <string name="thongbaoguimailthanhcong">Gửi email thành công !</string>
+    <string name="dang">Đăng</string>
+    <string name="thucdon">Thực đơn</string>
     <string name="taianh">Tải ảnh</string>
     <string name="checkin">Check in</string>
     <string name="binhluan">Bình Luận</string>
@@ -41,4 +43,5 @@
     <string name="luulai">Lưu lại</string>
     <string name="dangmocua">Đang mở cửa</string>
     <string name="dadongcua">Đã đóng cửa</string>
+
 </resources>
