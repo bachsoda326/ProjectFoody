@@ -167,6 +167,12 @@
                         android:drawablePadding="10dp"
                         android:gravity="left|center"/>
                 </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressbarODau"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recylerOdau"

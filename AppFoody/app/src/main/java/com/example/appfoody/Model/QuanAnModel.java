@@ -1,5 +1,8 @@
 package com.example.appfoody.Model;
 
+import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -13,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuanAnModel {
+public class QuanAnModel implements Parcelable {
     boolean giaohang;
     String giodongcua, giomocua, tenquanan, videogioithieu, maquanan;
     long luotthich;
@@ -21,6 +24,43 @@ public class QuanAnModel {
     List<String> hinhanhquanan;
     List<ThucDonModel> thucDons;
     List<BinhLuanModel> binhLuanModelList;
+    List<ChiNhanhQuanAnModel> chiNhanhQuanAnModelList;
+
+    protected QuanAnModel(Parcel in) {
+        giaohang = in.readByte() != 0;
+        giodongcua = in.readString();
+        giomocua = in.readString();
+        tenquanan = in.readString();
+        videogioithieu = in.readString();
+        maquanan = in.readString();
+        luotthich = in.readLong();
+        tienich = in.createStringArrayList();
+        hinhanhquanan = in.createStringArrayList();
+        chiNhanhQuanAnModelList=new ArrayList<ChiNhanhQuanAnModel>();
+        in.readTypedList(chiNhanhQuanAnModelList,ChiNhanhQuanAnModel.CREATOR);
+        binhLuanModelList=new ArrayList<BinhLuanModel>();
+        in.readTypedList(binhLuanModelList,BinhLuanModel.CREATOR);
+    }
+
+    public static final Creator<QuanAnModel> CREATOR = new Creator<QuanAnModel>() {
+        @Override
+        public QuanAnModel createFromParcel(Parcel in) {
+            return new QuanAnModel(in);
+        }
+
+        @Override
+        public QuanAnModel[] newArray(int size) {
+            return new QuanAnModel[size];
+        }
+    };
+
+    public List<ChiNhanhQuanAnModel> getChiNhanhQuanAnModelList() {
+        return chiNhanhQuanAnModelList;
+    }
+
+    public void setChiNhanhQuanAnModelList(List<ChiNhanhQuanAnModel> chiNhanhQuanAnModelList) {
+        this.chiNhanhQuanAnModelList = chiNhanhQuanAnModelList;
+    }
 
     DatabaseReference nodeRoot;
 
@@ -116,7 +156,7 @@ public class QuanAnModel {
         this.binhLuanModelList = binhLuanModelList;
     }
 
-    public void getDanhSachQuanAn(final OdauInterface odauInterface) {
+    public void getDanhSachQuanAn(final OdauInterface odauInterface, final Location vitrihientai) {
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -156,7 +196,22 @@ public class QuanAnModel {
                         binhLuanlist.add(binhLuanModel);
                     }
                     quanAnModel.setBinhLuanModelList(binhLuanlist);
+                    //Lấy chi nhánh quán ăn
+                    DataSnapshot snapshotChiNhanhQuanAn=dataSnapshot.child("chinhanhquanans").child(quanAnModel.getMaquanan());
 
+                    List<ChiNhanhQuanAnModel> chiNhanhQuanAnModels=new ArrayList<>();
+
+                    for(DataSnapshot valueChiNhanhQuanAn: snapshotChiNhanhQuanAn.getChildren())
+                    {
+                        ChiNhanhQuanAnModel chiNhanhQuanAnModel =valueChiNhanhQuanAn.getValue(ChiNhanhQuanAnModel.class);
+                        Location vitriquanan= new Location("");
+                        vitriquanan.setLatitude(chiNhanhQuanAnModel.getLatitude());
+                        vitriquanan.setLongitude(chiNhanhQuanAnModel.getLongitude());
+                        double khoangcach=(vitrihientai.distanceTo(vitriquanan))/1000;
+                        chiNhanhQuanAnModel.setKhoangcach(khoangcach);
+                        chiNhanhQuanAnModels.add(chiNhanhQuanAnModel);
+                    }
+                    quanAnModel.setChiNhanhQuanAnModelList(chiNhanhQuanAnModels);
                     odauInterface.getDanhSachQuanAnModel(quanAnModel);
                 }
             }
@@ -168,5 +223,25 @@ public class QuanAnModel {
         };
 
         nodeRoot.addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (giaohang ? 1 : 0));
+        dest.writeString(giodongcua);
+        dest.writeString(giomocua);
+        dest.writeString(tenquanan);
+        dest.writeString(videogioithieu);
+        dest.writeString(maquanan);
+        dest.writeLong(luotthich);
+        dest.writeStringList(tienich);
+        dest.writeStringList(hinhanhquanan);
+        dest.writeTypedList(chiNhanhQuanAnModelList);
+        dest.writeTypedList(binhLuanModelList);
     }
 }
