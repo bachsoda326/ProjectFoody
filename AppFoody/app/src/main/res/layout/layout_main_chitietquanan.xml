@@ -47,6 +47,7 @@
                 android:textColor="@color/colorAccent" />
 
             <Button
+                android:id="@+id/btnBinhLuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -216,8 +217,9 @@
                 android:textSize="18sp"/>
         </LinearLayout>
 
-    <include
-        layout="@layout/layout_binhluan_chitietquanan">
+        <include layout="@layout/layout_thucdon_chitiet"/>
+
+        <include layout="@layout/layout_binhluan_chitietquanan">
 
     </include>
     </LinearLayout>
