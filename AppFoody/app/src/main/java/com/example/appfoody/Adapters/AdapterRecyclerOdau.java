@@ -1,8 +1,11 @@
 package com.example.appfoody.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.appfoody.Model.BinhLuanModel;
+import com.example.appfoody.Model.ChiNhanhQuanAnModel;
 import com.example.appfoody.Model.QuanAnModel;
 import com.example.appfoody.R;
+import com.example.appfoody.View.ChiTietQuanAnActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -27,19 +32,22 @@ public class AdapterRecyclerOdau extends RecyclerView.Adapter<AdapterRecyclerOda
 
     List<QuanAnModel> quanAnModelList;
     int resource;
+    Context context;
 
-    public AdapterRecyclerOdau(List<QuanAnModel> quanAnModelList, int resource) {
+    public AdapterRecyclerOdau(Context context,List<QuanAnModel> quanAnModelList, int resource) {
         this.quanAnModelList = quanAnModelList;
         this.resource = resource;
+        this.context=context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTenQuanAnOdau;
         Button btnDatMonOdau;
         ImageView imgHinhQuanAnOdau;
-        TextView txtTieuDeBinhLuan, txtTieuDeBinhLuan2, txtNoiDungBinhLuan, txtNoiDungBinhLuan2, txtChamDiemBinhLuan, txtChamDiemBinhLuan2, txtTongBinhLuan, txtTongAnhBinhLuan;
+        TextView txtTieuDeBinhLuan, txtTieuDeBinhLuan2, txtNoiDungBinhLuan, txtNoiDungBinhLuan2, txtChamDiemBinhLuan, txtChamDiemBinhLuan2, txtTongBinhLuan, txtTongAnhBinhLuan,txtDiemTrungBinhQuanAn,txtDiaChiQuanAnOdau,txtKhoangCachQuanAn;
         CircleImageView  circleImgUser, circleImgUser2;
         LinearLayout containerBinhLuan, containerBinhLuan2;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +67,10 @@ public class AdapterRecyclerOdau extends RecyclerView.Adapter<AdapterRecyclerOda
             txtChamDiemBinhLuan2 = itemView.findViewById(R.id.txtChamDiemBinhLuan2);
             txtTongBinhLuan = itemView.findViewById(R.id.txtTongBinhLuan);
             txtTongAnhBinhLuan = itemView.findViewById(R.id.txtTongAnhBinhLuan);
+            txtDiemTrungBinhQuanAn=itemView.findViewById(R.id.txtDiemTrungBinhQuanAn);
+            txtDiaChiQuanAnOdau= itemView.findViewById(R.id.txtDiaChiQuanAnOdau);
+            txtKhoangCachQuanAn= itemView.findViewById(R.id.txtKhoangCachQuanAn);
+            cardView=itemView.findViewById(R.id.cardViewOdau);
         }
     }
 
@@ -73,7 +85,7 @@ public class AdapterRecyclerOdau extends RecyclerView.Adapter<AdapterRecyclerOda
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterRecyclerOdau.ViewHolder viewHolder, int i) {
-        QuanAnModel quanAnModel = quanAnModelList.get(i);
+        final QuanAnModel quanAnModel = quanAnModelList.get(i);
         viewHolder.txtTenQuanAnOdau.setText(quanAnModel.getTenquanan());
         viewHolder.txtTongBinhLuan.setText(quanAnModel.getBinhLuanModelList().size() + "");
 
@@ -112,16 +124,43 @@ public class AdapterRecyclerOdau extends RecyclerView.Adapter<AdapterRecyclerOda
             }
 
             int tongSoAnhBinhLuan = 0;
-            for (BinhLuanModel binhLuanModel1 : quanAnModel.getBinhLuanModelList()
-                 ) {
+            int tongDiemBinhLuan=0;
+            for (BinhLuanModel binhLuanModel1 : quanAnModel.getBinhLuanModelList()) {
                 tongSoAnhBinhLuan += binhLuanModel1.getHinhAnhList().size();
+                tongDiemBinhLuan +=binhLuanModel.getChamdiem();
             }
+            double diemTrungBinhCuaQuanAn=tongDiemBinhLuan/quanAnModel.getBinhLuanModelList().size();
+            viewHolder.txtDiemTrungBinhQuanAn.setText(String.format("%.1f",diemTrungBinhCuaQuanAn));
             viewHolder.txtTongAnhBinhLuan.setText(tongSoAnhBinhLuan + "");
         } else {
             viewHolder.containerBinhLuan.setVisibility(View.GONE);
             viewHolder.containerBinhLuan2.setVisibility(View.GONE);
         }
+        //Lấy chi nhánh quán ăn và hiển thị địa chỉ và km
+        if(quanAnModel.getChiNhanhQuanAnModelList().size()>0)
+        {
+            ChiNhanhQuanAnModel chiNhanhQuanAnModelTam =quanAnModel.getChiNhanhQuanAnModelList().get(0);
+            for(ChiNhanhQuanAnModel chiNhanhQuanAnModel:quanAnModel.getChiNhanhQuanAnModelList())
+            {
+                if(chiNhanhQuanAnModelTam.getKhoangcach() > chiNhanhQuanAnModel.getKhoangcach())
+                {
+                    chiNhanhQuanAnModelTam=chiNhanhQuanAnModel;
+                }
+            }
+            viewHolder.txtDiaChiQuanAnOdau.setText(chiNhanhQuanAnModelTam.getDiachi());
+            viewHolder.txtKhoangCachQuanAn.setText(String.format("%.1f",chiNhanhQuanAnModelTam.getKhoangcach())+ "km");
+        }
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iChiTietQuanAn=new Intent(context, ChiTietQuanAnActivity.class);
+                iChiTietQuanAn.putExtra("quanan",quanAnModel);
+                context.startActivity(iChiTietQuanAn);
+            }
+        });
     }
+
+
 
     private void setHinhAnhUser(final CircleImageView circleImageView, String linkHinh){
         StorageReference storageHinhUser = FirebaseStorage.getInstance().getReference().child("thanhvien").child(linkHinh);

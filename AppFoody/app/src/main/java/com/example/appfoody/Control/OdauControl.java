@@ -1,9 +1,12 @@
 package com.example.appfoody.Control;
 
 import android.content.Context;
+import android.location.Location;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.appfoody.Adapters.AdapterRecyclerOdau;
 import com.example.appfoody.Control.Interfaces.OdauInterface;
@@ -23,13 +26,13 @@ public class OdauControl {
         quanAnModel = new QuanAnModel();
     }
 
-    public void getDanhSachQuanAnController(RecyclerView recyclerOdau){
+    public void getDanhSachQuanAnController(Context context,RecyclerView recyclerOdau, final ProgressBar progressBarODau, Location vitrihientai){
 
         final List<QuanAnModel> quanAnModelList = new ArrayList<>();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerOdau.setLayoutManager(layoutManager);
-        adapterRecyclerOdau = new AdapterRecyclerOdau(quanAnModelList, R.layout.custom_layout_recyclerview_odau);
+        adapterRecyclerOdau = new AdapterRecyclerOdau(context,quanAnModelList, R.layout.custom_layout_recyclerview_odau);
         recyclerOdau.setAdapter(adapterRecyclerOdau);
 
         OdauInterface odauInterface = new OdauInterface() {
@@ -37,9 +40,10 @@ public class OdauControl {
             public void getDanhSachQuanAnModel(QuanAnModel quanAnModel) {
                 quanAnModelList.add(quanAnModel);
                 adapterRecyclerOdau.notifyDataSetChanged();
+                progressBarODau.setVisibility(View.GONE);
             }
         };
 
-        quanAnModel.getDanhSachQuanAn(odauInterface);
+        quanAnModel.getDanhSachQuanAn(odauInterface,vitrihientai);
     }
 }
