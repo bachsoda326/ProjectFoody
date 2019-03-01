@@ -126,19 +126,19 @@ public class BinhLuanModel implements Parcelable {
         this.hinhAnhList = hinhAnhList;
     }
 
-    public void ThemBinhLuan(String maQuanAn, BinhLuanModel binhLuanModel, final List<String> listHinh){
+    public void ThemBinhLuan(String maQuanAn, BinhLuanModel binhLuanModel, final List<String> listHinh) {
         DatabaseReference nodeBinhLuan = FirebaseDatabase.getInstance().getReference().child("binhluans");
-        String mabinhluan =  nodeBinhLuan.child(maQuanAn).push().getKey();
+        String mabinhluan = nodeBinhLuan.child(maQuanAn).push().getKey();
 
         nodeBinhLuan.child(maQuanAn).child(mabinhluan).setValue(binhLuanModel).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
 
-                    if(listHinh.size() > 0){
-                        for(String valueHinh : listHinh){
+                    if (listHinh.size() > 0) {
+                        for (String valueHinh : listHinh) {
                             Uri uri = Uri.fromFile(new File(valueHinh));
-                            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("hinhanh/"+uri.getLastPathSegment());
+                            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("hinhanh/" + uri.getLastPathSegment());
                             storageReference.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -152,12 +152,13 @@ public class BinhLuanModel implements Parcelable {
             }
         });
 
-        if(listHinh.size() > 0){
-            for(String valueHinh : listHinh){
+        if (listHinh.size() > 0) {
+            for (String valueHinh : listHinh) {
                 Uri uri = Uri.fromFile(new File(valueHinh));
                 FirebaseDatabase.getInstance().getReference().child("hinhanhbinhluans").child(mabinhluan).push().setValue(uri.getLastPathSegment());
             }
         }
+    }
 
     @Override
     public int describeContents() {

@@ -216,12 +216,11 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
         </LinearLayout>
-
-        <include layout="@layout/layout_thucdon_chitiet"/>
-
         <include layout="@layout/layout_binhluan_chitietquanan">
 
-    </include>
+        </include>
+
+
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
