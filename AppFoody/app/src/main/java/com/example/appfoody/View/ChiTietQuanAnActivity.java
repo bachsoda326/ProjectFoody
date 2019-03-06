@@ -115,7 +115,7 @@ public class ChiTietQuanAnActivity extends AppCompatActivity implements View.OnC
         txtThoiGianHoatDong.setText(giomocua+ "-" +giodongcua);
 
         StorageReference storageHinhQuanAn = FirebaseStorage.getInstance().getReference().child("hinhanh").child(quanAnModel.getHinhanhquanan().get(0));
-        long ONE_MEGABYTE = 1024 * 1024;
+        long ONE_MEGABYTE = 5 * 1024 * 1024;
         storageHinhQuanAn.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {

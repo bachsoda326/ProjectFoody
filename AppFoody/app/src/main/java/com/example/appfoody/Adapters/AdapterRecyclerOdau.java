@@ -94,7 +94,7 @@ public class AdapterRecyclerOdau extends RecyclerView.Adapter<AdapterRecyclerOda
 
         if(quanAnModel.getHinhanhquanan().size() > 0){
             StorageReference storageHinhAnh = FirebaseStorage.getInstance().getReference().child("hinhanh").child(quanAnModel.getHinhanhquanan().get(0));
-            long ONE_MEGABYTE = 1024 * 1024;
+            long ONE_MEGABYTE = 5 * 1024 * 1024;
             storageHinhAnh.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
