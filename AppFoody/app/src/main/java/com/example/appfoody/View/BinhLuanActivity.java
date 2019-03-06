@@ -106,7 +106,7 @@ public class BinhLuanActivity extends AppCompatActivity implements View.OnClickL
                 binhLuanModel.setLuotthich(0);
                 binhLuanModel.setMauser(mauser);
 
-                //binhLuanController.ThemBinhLuan(maquanan, binhLuanModel, listHinhDuocChon);
+                binhLuanController.ThemBinhLuan(maquanan, binhLuanModel, listHinhDuocChon);
                 break;
         }
     }

@@ -25,14 +25,12 @@ public class AdapterBinhLuan   extends RecyclerView.Adapter<AdapterBinhLuan.View
     Context context;
     int layout;
     List<BinhLuanModel> binhLuanModelList;
-    List<Bitmap> bitmapList;
 
     public  AdapterBinhLuan(Context context, int layout, List<BinhLuanModel> binhLuanModelList)
     {
         this.context=context;
         this.layout=layout;
         this.binhLuanModelList=binhLuanModelList;
-        bitmapList=new ArrayList<>();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         final CircleImageView circleImageView;
@@ -64,6 +62,7 @@ public class AdapterBinhLuan   extends RecyclerView.Adapter<AdapterBinhLuan.View
          viewHolder.txtNoiDungBinhLuan.setText(binhLuanModel.getNoidung());
          viewHolder.txtChamDiemBinhLuan.setText(binhLuanModel.getChamdiem()+"");
          setHinhAnhUser(viewHolder.circleImageView,"user.png");
+         final List<Bitmap> bitmapList = new ArrayList<>();
          for(String linkHinh : binhLuanModel.getHinhAnhList())
          {
              StorageReference storageHinhUser = FirebaseStorage.getInstance().getReference().child("hinhanh").child(linkHinh);

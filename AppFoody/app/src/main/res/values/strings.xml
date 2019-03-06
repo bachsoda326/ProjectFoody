@@ -9,6 +9,7 @@
     <string name="quenmatkhau">Quên mật khẩu</string>
     <string name="dangkymoi"> Đăng ký mới</string>
     <string name="facebook_app_id">349419059245376</string>
+    <string name="thongbaodangnhapthatbai">Tài khoản không hợp lệ !</string>
     <string name="odau">Ở đâu</string>
     <string name="angi">Ăn gì</string>
     <string name="moinhat">Mới nhất</string>
@@ -43,5 +44,16 @@
     <string name="luulai">Lưu lại</string>
     <string name="dangmocua">Đang mở cửa</string>
     <string name="dadongcua">Đã đóng cửa</string>
+    <string name="tenquanan">Tên quán ăn</string>
+    <string name="giatoida">Giá tối đa</string>
+    <string name="giatoithieu">Giá tối thiểu</string>
+    <string name="khonggiaohang">Không giao hàng</string>
+    <string name="giomocua">Giờ mở cửa</string>
+    <string name="giodongcua">Giờ đóng cửa</string>
+    <string name="luuquanan">Lưu quán ăn</string>
+    <string name="chinhanh">Chi nhánh</string>
+    <string name="tenmon">Tên món</string>
+    <string name="giatien">Giá tiền</string>
+    <string name="themthucdon">Thêm thực đơn</string>
 
 </resources>
