@@ -19,7 +19,7 @@ import java.util.List;
 public class QuanAnModel implements Parcelable {
     boolean giaohang;
     String giodongcua, giomocua, tenquanan, videogioithieu, maquanan;
-    long luotthich;
+    long luotthich, giatoithieu, giatoida;
     List<String> tienich;
     List<String> hinhanhquanan;
     List<ThucDonModel> thucDons;
@@ -122,6 +122,22 @@ public class QuanAnModel implements Parcelable {
 
     public void setLuotthich(long luotthich) {
         this.luotthich = luotthich;
+    }
+
+    public long getGiatoithieu() {
+        return giatoithieu;
+    }
+
+    public void setGiatoithieu(long giatoithieu) {
+        this.giatoithieu = giatoithieu;
+    }
+
+    public long getGiatoida() {
+        return giatoida;
+    }
+
+    public void setGiatoida(long giatoida) {
+        this.giatoida = giatoida;
     }
 
     public List<String> getTienich() {

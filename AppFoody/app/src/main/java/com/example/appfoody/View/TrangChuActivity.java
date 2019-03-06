@@ -1,9 +1,11 @@
 package com.example.appfoody.View;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -15,6 +17,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewPager.OnP
     ViewPager viewpager_trangchu;
     RadioButton rd_odau, rd_angi;
     RadioGroup rdgroup_odau_angi;
+    ImageView imgThemQuanAn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +28,20 @@ public class TrangChuActivity extends AppCompatActivity implements ViewPager.OnP
         rd_odau = findViewById(R.id.rd_odau);
         rd_angi = findViewById(R.id.rd_angi);
         rdgroup_odau_angi = findViewById(R.id.rdgroup_odau_angi);
+        imgThemQuanAn = findViewById(R.id.imgThemQuanAn);
 
         AdapterViewPagerTrangChu adapterViewPagerTrangChu = new AdapterViewPagerTrangChu(getSupportFragmentManager());
         viewpager_trangchu.setAdapter(adapterViewPagerTrangChu);
         viewpager_trangchu.addOnPageChangeListener(this);
         rdgroup_odau_angi.setOnCheckedChangeListener(this);
+
+        imgThemQuanAn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iThemQuanAn=new Intent(TrangChuActivity.this, ThemQuanAnActivity.class);
+                startActivity(iThemQuanAn);
+            }
+        });
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,6 +36,7 @@ public class ChiTietQuanAnActivity extends AppCompatActivity implements View.OnC
     android.support.v7.widget.Toolbar toolbar;
     RecyclerView recyclerViewBinhLuan;
     AdapterBinhLuan adapterBinhLuan;
+    RecyclerView recyclerThucDon;
 
     ThucDonController thucDonController;
 
@@ -58,6 +60,8 @@ public class ChiTietQuanAnActivity extends AppCompatActivity implements View.OnC
         txtTieuDeToolbar=findViewById(R.id.txtTieuDeToolbar);
         recyclerViewBinhLuan=findViewById(R.id.recycleBinhLuanChiTietQuanAn);
         toolbar=findViewById(R.id.toolbar);
+        recyclerThucDon = findViewById(R.id.recyclerThucDon);
+
         toolbar.setTitle("");
 
         setSupportActionBar(toolbar);
@@ -65,6 +69,8 @@ public class ChiTietQuanAnActivity extends AppCompatActivity implements View.OnC
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         thucDonController = new ThucDonController();
+
+        HienThiChiTietQuanAn();
 
         btnBinhLuan.setOnClickListener(this);
     }
@@ -78,17 +84,13 @@ public class ChiTietQuanAnActivity extends AppCompatActivity implements View.OnC
     private void setSupportActionBar(Toolbar toolbar) {
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void HienThiChiTietQuanAn(){
         Calendar calendar =Calendar.getInstance();
         SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm");
         Date date;
         String giohientai=dateFormat.format(calendar.getTime());
         String giomocua=quanAnModel.getGiomocua();
         String giodongcua=quanAnModel.getGiodongcua();
-
 
         try {
             Date dateHienTai=dateFormat.parse(giohientai);
@@ -121,12 +123,21 @@ public class ChiTietQuanAnActivity extends AppCompatActivity implements View.OnC
                 imHinhQuanAn.setImageBitmap(bitmap);
             }
         });
+
         //Load danh sách bình luận quán ăn
         RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(this);
         recyclerViewBinhLuan.setLayoutManager(layoutManager);
         adapterBinhLuan= new AdapterBinhLuan(this,R.layout.custom_layout_binhluan,quanAnModel.getBinhLuanModelList());
         recyclerViewBinhLuan.setAdapter(adapterBinhLuan);
         adapterBinhLuan.notifyDataSetChanged();
+
+        thucDonController.getDanhSachThucDonQuanAnTheoMa(this,quanAnModel.getMaquanan(),recyclerThucDon);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 
     @Override
